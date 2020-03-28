@@ -10,26 +10,44 @@ defmodule CodingBuilds do
 
     # ====== Headers ======
     headers = [
-      {"Authorization", "token #{token}"},
+      {"Authorization", "token #{token}"}
     ]
 
     # ====== Query Params ======
-    params = [ 
+    params = [
       {"page", "1"},
-      {"pageSize", "30"},
+      {"pageSize", "30"}
     ]
 
     HTTPoison.start()
-    case HTTPoison.get(url, headers, params: params) do
-      {:ok, response = %HTTPoison.Response{status_code: status_code, body: body}} ->
-        IO.puts("Response Status Code: #{status_code}")
-        IO.puts("Response Body: #{body}")
 
-        response
+    case HTTPoison.get(url, headers, params: params) do
+      {:ok, %HTTPoison.Response{status_code: _status_code, body: body}} ->
+        pretty_response(body)
+
       {:error, error = %HTTPoison.Error{reason: reason}} ->
         IO.puts("Request failed: #{reason}")
 
         error
+    end
+  end
+
+  defp pretty_response(body) do
+    result = Jason.decode!(body)
+
+    case result["code"] do
+      0 ->
+        builds = result["data"]["list"]
+
+        pretty_string =
+          builds
+          |> Enum.map(fn build -> "number #{build["number"]}" end)
+          |> Enum.join("\n")
+
+        IO.puts(pretty_string)
+
+      _ ->
+        IO.puts(body)
     end
   end
 end
