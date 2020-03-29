@@ -35,5 +35,7 @@ result = JSON.parse(body)
 
 transfer_used_human = (result["transfer_used"].to_f / 1000 / 1000 / 1000).round(2)
 puts "👨🏻‍💻已用#{transfer_used_human}GB"
-puts "Refresh... | refresh=true"
+puts "---"
 puts "Dashboard Web | href=https://blackssl.com/dashboard"
+puts "---"
+puts "Refresh... | refresh=true"
