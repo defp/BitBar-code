@@ -3,3 +3,5 @@ coding_builds/coding_builds
 coding_builds/config/config.ex
 coding_builds/.vscode/settings.json
 .blackssl.cookie
+*.token
+.vscode/settings.json
