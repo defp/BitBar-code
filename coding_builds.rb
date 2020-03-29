@@ -28,6 +28,8 @@ end
 def pretty_status_emoji(status)
   if status == 'SUCCEED'
     '✅'
+  elsif status == 'RUNNING'
+    '🏃‍♀️'
   else
     '❌'
   end
@@ -38,7 +40,7 @@ def pretty_line(build)
   status = build['status']
   status_emoji = pretty_status_emoji(status)
 
-  "#{status_emoji} #{build['cause']} #{job} #{build['number']}"
+  "#{status_emoji} #{status} #{build['cause']} #{job} #{build['number']}"
 end
 
 def pretty_first_line(build)
