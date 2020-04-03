@@ -32,6 +32,8 @@ def pretty_status_emoji(status)
     '🏃‍♀️'
   elsif status == 'QUEUED'
     '👨‍🚒'
+  elsif status == 'ABORTED'
+    '⛔️'
   elsif status == 'INITIALIZING'
     '🐶'
   else
